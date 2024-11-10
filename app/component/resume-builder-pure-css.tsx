@@ -1,5 +1,5 @@
 "use client"
-
+import Image from "next/image"
 import React, { useState, useRef } from 'react'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
@@ -175,7 +175,7 @@ export default function ResumeBuilder() {
                   alignItems: 'center',
                   gap: '10px'
                 }}>
-                  <img src={profilePicture} alt="Profile" style={{width: '128px', height: '128px', borderRadius: '50%'}} />
+                  <Image src={profilePicture} alt="Profile" style={{width: '128px', height: '128px', borderRadius: '50%'}} />
                   <div>
                     <h3 style={{fontWeight: 'bold'}}>Career Objective</h3>
                     <p style={{fontSize: '14px'}}>{personalInfo.objective}</p>
