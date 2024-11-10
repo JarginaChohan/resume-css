@@ -1,7 +1,8 @@
 "use client"
-import React, { useState, useRef } from 'react';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+
+import React, { useState, useRef } from 'react'
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 
 export default function ResumeBuilder() {
   const [personalInfo, setPersonalInfo] = useState({
@@ -26,7 +27,7 @@ export default function ResumeBuilder() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setPersonalInfo(prev => ({ ...prev, [name]: value }));
+    setPersonalInfo((prev:any) => ({ ...prev, [name]: value }));
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,46 +80,73 @@ export default function ResumeBuilder() {
           borderRadius: '8px',
           padding: '20px'
         }}>
-          <h2>Personal Information</h2>
-          <input
-            type="text"
-            name="firstName"
-            value={personalInfo.firstName}
-            onChange={handleInputChange}
-            placeholder="First Name"
-          />
-          <input
-            type="text"
-            name="lastName"
-            value={personalInfo.lastName}
-            onChange={handleInputChange}
-            placeholder="Last Name"
-          />
-          <input
-            type="text"
-            name="phone"
-            value={personalInfo.phone}
-            onChange={handleInputChange}
-            placeholder="Phone"
-          />
-          <input
-            type="email"
-            name="email"
-            value={personalInfo.email}
-            onChange={handleInputChange}
-            placeholder="Email"
-          />
-          <textarea
-            name="objective"
-            value={personalInfo.objective}
-            onChange={handleInputChange}
-            placeholder="Objective"
-          ></textarea>
-          {/* Add more input fields as needed */}
-          
-          <h2>Profile Picture</h2>
-          <input type="file" accept="image/*" onChange={handleImageUpload} />
-          {profilePicture && <img src={profilePicture} alt="Profile" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />}
+          <h2 style={{
+            fontSize: '20px',
+            fontWeight: 'bold',
+            marginBottom: '15px'
+          }}>Personal Information</h2>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '15px'
+          }}>
+            <div>
+              <label htmlFor="profilePicture" style={{display: 'block', marginBottom: '5px'}}>Profile Picture</label>
+              <input id="profilePicture" type="file" accept="image/*" onChange={handleImageUpload} style={{width: '100%'}} />
+            </div>
+            <div>
+              <label htmlFor="firstName" style={{display: 'block', marginBottom: '5px'}}>First Name</label>
+              <input id="firstName" name="firstName" value={personalInfo.firstName} onChange={handleInputChange} style={{width: '100%', padding: '5px'}} />
+            </div>
+            <div>
+              <label htmlFor="lastName" style={{display: 'block', marginBottom: '5px'}}>Last Name</label>
+              <input id="lastName" name="lastName" value={personalInfo.lastName} onChange={handleInputChange} style={{width: '100%', padding: '5px'}} />
+            </div>
+            <div>
+              <label htmlFor="phone" style={{display: 'block', marginBottom: '5px'}}>Phone Number</label>
+              <input id="phone" name="phone" value={personalInfo.phone} onChange={handleInputChange} style={{width: '100%', padding: '5px'}} />
+            </div>
+            <div>
+              <label htmlFor="email" style={{display: 'block', marginBottom: '5px'}}>Email Address</label>
+              <input id="email" name="email" type="email" value={personalInfo.email} onChange={handleInputChange} style={{width: '100%', padding: '5px'}} />
+            </div>
+            <div>
+              <label htmlFor="objective" style={{display: 'block', marginBottom: '5px'}}>Career Objective</label>
+              <textarea id="objective" name="objective" value={personalInfo.objective} onChange={handleInputChange} style={{width: '100%', padding: '5px', minHeight: '100px'}} />
+            </div>
+            <div>
+              <label htmlFor="education" style={{display: 'block', marginBottom: '5px'}}>Education</label>
+              <textarea id="education" name="education" value={personalInfo.education} onChange={handleInputChange} style={{width: '100%', padding: '5px', minHeight: '100px'}} />
+            </div>
+            <div>
+              <label htmlFor="skills" style={{display: 'block', marginBottom: '5px'}}>Skills</label>
+              <textarea id="skills" name="skills" value={personalInfo.skills} onChange={handleInputChange} style={{width: '100%', padding: '5px', minHeight: '100px'}} />
+            </div>
+            <div>
+              <label htmlFor="experience" style={{display: 'block', marginBottom: '5px'}}>Work Experience</label>
+              <textarea id="experience" name="experience" value={personalInfo.experience} onChange={handleInputChange} style={{width: '100%', padding: '5px', minHeight: '100px'}} />
+            </div>
+            <div>
+              <label htmlFor="certification" style={{display: 'block', marginBottom: '5px'}}>Certification</label>
+              <textarea id="certification" name="certification" value={personalInfo.certification} onChange={handleInputChange} style={{width: '100%', padding: '5px', minHeight: '100px'}} />
+            </div>
+            <div>
+              <label htmlFor="linkedin" style={{display: 'block', marginBottom: '5px'}}>LinkedIn URL</label>
+              <input id="linkedin" name="linkedin" value={personalInfo.linkedin} onChange={handleInputChange} style={{width: '100%', padding: '5px'}} />
+            </div>
+            <div>
+              <label htmlFor="facebook" style={{display: 'block', marginBottom: '5px'}}>Facebook URL</label>
+              <input id="facebook" name="facebook" value={personalInfo.facebook} onChange={handleInputChange} style={{width: '100%', padding: '5px'}} />
+            </div>
+            <div>
+              <label htmlFor="instagram" style={{display: 'block', marginBottom: '5px'}}>Instagram URL</label>
+              <input id="instagram" name="instagram" value={personalInfo.instagram} onChange={handleInputChange} style={{width: '100%', padding: '5px'}} />
+            </div>
+            <div>
+              <label htmlFor="github" style={{display: 'block', marginBottom: '5px'}}>GitHub URL</label>
+              <input id="github" name="github" value={personalInfo.github} onChange={handleInputChange} style={{width: '100%', padding: '5px'}} />
+            </div>
+          </div>
         </div>
 
         <div>
@@ -139,11 +167,61 @@ export default function ResumeBuilder() {
               borderRadius: '8px',
               backgroundColor: 'white'
             }}>
-              <h3>{personalInfo.firstName} {personalInfo.lastName}</h3>
-              <p>{personalInfo.phone} | {personalInfo.email}</p>
-              <p>{personalInfo.objective}</p>
-              {showSkills && <p>Skills: {personalInfo.skills}</p>}
-              {/* Add more resume content as needed */}
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '20px'
+              }}>
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '10px'
+                }}>
+                  <img src={profilePicture} alt="Profile" style={{width: '128px', height: '128px', borderRadius: '50%'}} />
+                  <div>
+                    <h3 style={{fontWeight: 'bold'}}>Career Objective</h3>
+                    <p style={{fontSize: '14px'}}>{personalInfo.objective}</p>
+                  </div>
+                  <div>
+                    <h3 style={{fontWeight: 'bold'}}>Certification</h3>
+                    <p style={{fontSize: '14px'}}>{personalInfo.certification}</p>
+                  </div>
+                  <div>
+                    <h3 style={{fontWeight: 'bold'}}>Contact Us</h3>
+                    <div style={{display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '10px'}}>
+                      <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                      <a href={personalInfo.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
+                      <a href={personalInfo.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+                      <a href={personalInfo.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                  </div>
+                </div>
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '15px'
+                }}>
+                  <div>
+                    <h2 style={{fontSize: '24px', fontWeight: 'bold'}}>{personalInfo.firstName} {personalInfo.lastName}</h2>
+                    <p>{personalInfo.phone} | {personalInfo.email}</p>
+                  </div>
+                  <div>
+                    <h3 style={{fontWeight: 'bold'}}>Education</h3>
+                    <p style={{fontSize: '14px', whiteSpace: 'pre-line'}}>{personalInfo.education}</p>
+                  </div>
+                  {showSkills && (
+                    <div>
+                      <h3 style={{fontWeight: 'bold'}}>Skills</h3>
+                      <p style={{fontSize: '14px'}}>{personalInfo.skills}</p>
+                    </div>
+                  )}
+                  <div>
+                    <h3 style={{fontWeight: 'bold'}}>Work Experience</h3>
+                    <p style={{fontSize: '14px'}}>{personalInfo.experience}</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div style={{
@@ -174,5 +252,5 @@ export default function ResumeBuilder() {
         </div>
       </div>
     </div>
-  );
+  )
 }
