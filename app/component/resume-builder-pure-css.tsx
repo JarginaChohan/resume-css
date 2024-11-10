@@ -9,11 +9,11 @@ export default function ResumeBuilder() {
     lastName: 'Chohan',
     phone: '0336-2824083',
     email: 'jargina.chohan7@gmail.com',
-    objective: 'To secure an employment opportunity with an organisation, where I can utilize my professional skills and knowledge to the maximum and value in the growth of the organisation.',
-    education: 'Master MBA in HR from BBSUL\nBachelor\'s in Bio Science, University of Karachi\nIntermediate from SMB Fatima Jinnah College Karachi\nMatriculation from Alpha girls/Boys School Karachi',
-    skills: 'Ms Office, HTML, CSS, Typescript, Javascript, Next.js, Tailwind CSS',
+    objective: 'To secure an employment opportunity with an organisation...',
+    education: 'Master MBA in HR from BBSUL...',
+    skills: 'Ms Office, HTML, CSS, Typescript...',
     experience: 'Currently I am working in a Govt School.',
-    certification: 'Artificial Intelligence, web 3.0 & Metaverse: From Governor House Karachi (ongoing)',
+    certification: 'Artificial Intelligence, web 3.0 & Metaverse...',
     linkedin: 'https://www.linkedin.com/in/jargina-chohan-5313a71aa?',
     facebook: 'https://www.facebook.com/Jargina.chohan509',
     instagram: 'https://www.instagram.com/jargina.chohan509?igsh=Z2tvNTlhaXhsa2Zi',
@@ -22,7 +22,7 @@ export default function ResumeBuilder() {
 
   const [profilePicture, setProfilePicture] = useState<string>('/placeholder.svg?height=150&width=150');
   const [showSkills, setShowSkills] = useState(true);
-  const resumeRef = useRef<HTMLDivElement>(null); // Type the ref as HTMLDivElement
+  const resumeRef = useRef<HTMLDivElement>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -79,7 +79,46 @@ export default function ResumeBuilder() {
           borderRadius: '8px',
           padding: '20px'
         }}>
-          {/* Input fields and form code here */}
+          <h2>Personal Information</h2>
+          <input
+            type="text"
+            name="firstName"
+            value={personalInfo.firstName}
+            onChange={handleInputChange}
+            placeholder="First Name"
+          />
+          <input
+            type="text"
+            name="lastName"
+            value={personalInfo.lastName}
+            onChange={handleInputChange}
+            placeholder="Last Name"
+          />
+          <input
+            type="text"
+            name="phone"
+            value={personalInfo.phone}
+            onChange={handleInputChange}
+            placeholder="Phone"
+          />
+          <input
+            type="email"
+            name="email"
+            value={personalInfo.email}
+            onChange={handleInputChange}
+            placeholder="Email"
+          />
+          <textarea
+            name="objective"
+            value={personalInfo.objective}
+            onChange={handleInputChange}
+            placeholder="Objective"
+          ></textarea>
+          {/* Add more input fields as needed */}
+          
+          <h2>Profile Picture</h2>
+          <input type="file" accept="image/*" onChange={handleImageUpload} />
+          {profilePicture && <img src={profilePicture} alt="Profile" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />}
         </div>
 
         <div>
@@ -100,7 +139,11 @@ export default function ResumeBuilder() {
               borderRadius: '8px',
               backgroundColor: 'white'
             }}>
-              {/* Resume preview content */}
+              <h3>{personalInfo.firstName} {personalInfo.lastName}</h3>
+              <p>{personalInfo.phone} | {personalInfo.email}</p>
+              <p>{personalInfo.objective}</p>
+              {showSkills && <p>Skills: {personalInfo.skills}</p>}
+              {/* Add more resume content as needed */}
             </div>
           </div>
           <div style={{
