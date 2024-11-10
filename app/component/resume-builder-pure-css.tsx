@@ -29,30 +29,35 @@ export default function ResumeBuilder() {
     setPersonalInfo((prev:any) => ({ ...prev, [name]: value }))
   }
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setProfilePicture(reader.result as string)
+  // In `handleImageUpload`
+const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      if (typeof reader.result === 'string') {
+        setProfilePicture(reader.result);
       }
-      reader.readAsDataURL(file)
-    }
+    };
+    reader.readAsDataURL(file);
   }
+};
 
-  const generatePDF = () => {
-    if (resumeRef.current) {
-      html2canvas(resumeRef.current as HTMLElement).then((canvas: HTMLCanvasElement) => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF();
-        const imgProps = pdf.getImageProperties(imgData);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-        pdf.save('resume.pdf');
-      });
-    }
-  };
+// In `generatePDF`
+const generatePDF = () => {
+  if (resumeRef.current) {
+    html2canvas(resumeRef.current as HTMLElement).then((canvas: HTMLCanvasElement) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF();
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save('resume.pdf');
+    });
+  }
+};
+
   return (
     <div style={{
       fontFamily: 'Arial, sans-serif',
